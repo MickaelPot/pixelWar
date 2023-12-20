@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pixel War</title>
+  </head>
+  <body>
+  <div id="surface">
+    <div id="espaceDeJeu">
+      <h1 id="titre"></h1>
+      <div class="conteneurCanva">
+        <div id="curseur"></div>
+        <canvas id="myCanvas" width="1200" height="600"></canvas>
+      </div>
+      <div id="conteneurBas">
+        <div id="couleurs"></div>
+        <h2 id="temps"></h2>
+      </div>
+
+    </div>
+  </div>
+  <div id="login">
+    <div id="contenu">
+      <label for="login">Votre pseudo</label>
+      <input type="text" name="login" id="saisie">
+    </div>
+    <div id="bouton">
+      <button id="boutonValide">Valider</button>
+      <p id="validation"></p>
+    </div>
+  </div>
+
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>

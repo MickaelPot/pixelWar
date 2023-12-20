@@ -1,0 +1,80 @@
+#espaceDeJeu{
+  display: flex;
+  flex-direction: column;
+}
+
+.conteneurCanva{
+  align-items: center;
+  padding-top: 2rem;
+  margin-left: 3rem;
+}
+
+canvas {
+  box-shadow: 1px 1px 10px -5px rgba(0, 0, 0, 1);
+  cursor: none;
+}
+
+#couleurs{
+  display: flex;
+  flex-direction: row;
+}
+
+.nonModifie{
+  margin: 10px 10px 10px 10px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.modification{
+  margin: 10px 10px 10px 10px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border-color: black;
+  border-style: solid;
+}
+
+#login{
+  position: fixed;
+  align-items: center;
+  text-align: center;
+
+  padding: 10px 10px 10px 10px;
+  width: 300px;
+  height: 200px;
+  background: aliceblue;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+
+#contenu{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#bouton{
+  margin-top: 50px;
+}
+
+#curseur{
+  position: absolute;
+  box-sizing: border-box;
+  width: 10px;
+  height: 10px;
+  background: transparent;
+  border: 1px solid black;
+  cursor: none;
+}
+
+#temps{
+  margin-left: 20px;
+}
+
+#conteneurBas{
+  display: flex;
+  flex-direction: row;
+}
