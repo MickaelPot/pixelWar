@@ -24,6 +24,7 @@ const couleurs = [
     [0,0,0] //black
 ]
 const reglageTemps= 10;
+const reglageTempsAdmin = 2;
 
 let login="";
 let timeur=0;
@@ -177,29 +178,27 @@ const drawGrids= (cxt, width, height, cellWidth, cellHeight) => {
 
 const calculTemps= () => {
     if(!verrou){
-        timeout = new Date().getTime()+(reglageTemps*1000);
+        if(login === nomAdministrateur){
+            timeout = new Date().getTime()+(reglageTemps*1000);
+        }else{
+            timeout = new Date().getTime()+(reglageTempsAdmin*1000);
+        }
     }
     verrou=true;
 
-    if(login === nomAdministrateur){
-        verrou=false
-        thread=true
-        divTemps.innerHTML= "Faites ce que vous voulez";
-    }else{
-        let temps = setInterval(function(){
-            timestamp = new Date().getTime();
-            var t = timeout - timestamp;
-            timeur = Math.floor((t % (1000 * 60)) / 1000);
-            if(t<1){
-                verrou=false;
-                thread=true;
-                divTemps.innerHTML= "Vous pouvez jouer";
-                clearInterval(temps);
-            }else{
-                divTemps.innerHTML= "Attendez : "+timeur;
-            }
-        });
-    }
+    let temps = setInterval(function(){
+        timestamp = new Date().getTime();
+        var t = timeout - timestamp;
+        timeur = Math.floor((t % (1000 * 60)) / 1000);
+        if(t<1){
+            verrou=false;
+            thread=true;
+            divTemps.innerHTML= "Vous pouvez jouer";
+            clearInterval(temps);
+        }else{
+            divTemps.innerHTML= "Attendez : "+timeur;
+        }
+    });
 }
 
 const sendPixelToBDD= async (x, y) => {
