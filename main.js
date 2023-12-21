@@ -144,12 +144,12 @@ function validationPseudo(){
     const messageErreur=document.getElementById("validation");
     bouton.addEventListener("click",()=>{
         if(pseudo.value !==""){
-            messageErreur.innerHTML=""
-            document.getElementById("surface").style.opacity = "1";
-            document.getElementById("login").style.visibility="hidden";
             if(pseudo.value.length >20){
                 messageErreur.innerHTML="login trop long (moins de 20 caractères)";
             }else{
+                messageErreur.innerHTML=""
+                document.getElementById("surface").style.opacity = "1";
+                document.getElementById("login").style.visibility="hidden";
                 login=pseudo.value;
                 assembleCouleur();
             }
