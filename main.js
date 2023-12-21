@@ -147,8 +147,12 @@ function validationPseudo(){
             messageErreur.innerHTML=""
             document.getElementById("surface").style.opacity = "1";
             document.getElementById("login").style.visibility="hidden";
-            login=pseudo.value;
-            assembleCouleur();
+            if(pseudo.value.length >20){
+                messageErreur.innerHTML="login trop long (moins de 20 caractères)";
+            }else{
+                login=pseudo.value;
+                assembleCouleur();
+            }
         }else{
             messageErreur.innerHTML="Merci de saisir un login"
         }
