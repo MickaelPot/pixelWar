@@ -178,7 +178,7 @@ const drawGrids= (cxt, width, height, cellWidth, cellHeight) => {
 
 const calculTemps= () => {
     if(!verrou){
-        if(login === nomAdministrateur){
+        if(login !== nomAdministrateur){
             timeout = new Date().getTime()+(reglageTemps*1000);
         }else{
             timeout = new Date().getTime()+(reglageTempsAdmin*1000);
