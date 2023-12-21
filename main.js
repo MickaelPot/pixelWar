@@ -1,12 +1,9 @@
 import './style.css'
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { collection, addDoc, getDocs, onSnapshot, doc, query} from "firebase/firestore";
+import { collection, deleteDoc, getDocs, onSnapshot, doc, query, setDoc} from "firebase/firestore";
 
-
-
-
-
+const nomAdministrateur = "admin0000";
 
 const canvas = document.getElementById("myCanvas");
 const ctx = canvas.getContext("2d");
@@ -22,7 +19,9 @@ const couleurs = [
     [159,190,87], //olive
     [210,179,63], //yellow
     [231,126,49], //orange
-    [217,33,32] //red
+    [217,33,32], //red
+    [255,255,255], //white
+    [0,0,0] //black
 ]
 const reglageTemps= 10;
 
@@ -56,8 +55,7 @@ validationPseudo()
 
 const assembleCouleur = () => {
 
-    drawGrids(gridCtx, canvas.width, canvas.height,taillePixel,taillePixel);
-    //afficheTousPixels();
+    //drawGrids(gridCtx, canvas.width, canvas.height,taillePixel,taillePixel);
     getSnapShot();
 
     canvas.addEventListener("mousemove", function (e){
@@ -84,7 +82,12 @@ const assembleCouleur = () => {
 
     });
 
-    document.getElementById("titre").innerHTML= "Bienvenue "+login;
+    if(nomAdministrateur !== login){
+        document.getElementById("titre").innerHTML= "Bienvenue "+login;
+    }else{
+        document.getElementById("titre").innerHTML= "Bonjour Grand Maître :)";
+
+    }
     divTemps.innerHTML= "Vous pouvez jouer";
 
 
@@ -103,15 +106,15 @@ const assembleCouleur = () => {
         });
         divCouleur.addEventListener("mouseleave",(e)=>{
             if(e.target.getAttribute("class")==="nonModifie"){
-                e.target.style.borderColor="none"
-                e.target.style.borderStyle="none"
+                e.target.style.borderColor="lightgray"
+                e.target.style.borderStyle="solid"
             }
         });
         divCouleur.addEventListener("click",(e)=>{
             const toutesDivModifiees=document.getElementsByClassName("modification");
             for(let i=0; i<toutesDivModifiees.length;i++){
-                toutesDivModifiees[i].style.borderColor="none"
-                toutesDivModifiees[i].style.borderStyle="none"
+                toutesDivModifiees[i].style.borderColor="lightgray"
+                toutesDivModifiees[i].style.borderStyle="solid"
                 toutesDivModifiees[i].setAttribute('class', 'nonModifie');
             }
             e.target.setAttribute('class', 'modification');
@@ -162,20 +165,25 @@ const calculTemps= () => {
     }
     verrou=true;
 
-
-    let temps = setInterval(function(){
-        timestamp = new Date().getTime();
-        var t = timeout - timestamp;
-        timeur = Math.floor((t % (1000 * 60)) / 1000);
-        if(t<1){
-            verrou=false;
-            thread=true;
-            divTemps.innerHTML= "Vous pouvez jouer";
-            clearInterval(temps);
-        }else{
-            divTemps.innerHTML= "Attendez : "+timeur;
-        }
-    });
+    if(login === nomAdministrateur){
+        verrou=false
+        thread=true
+        divTemps.innerHTML= "Faites ce que vous voulez";
+    }else{
+        let temps = setInterval(function(){
+            timestamp = new Date().getTime();
+            var t = timeout - timestamp;
+            timeur = Math.floor((t % (1000 * 60)) / 1000);
+            if(t<1){
+                verrou=false;
+                thread=true;
+                divTemps.innerHTML= "Vous pouvez jouer";
+                clearInterval(temps);
+            }else{
+                divTemps.innerHTML= "Attendez : "+timeur;
+            }
+        });
+    }
 }
 
 const sendPixelToBDD= async (x, y) => {
@@ -186,7 +194,8 @@ const sendPixelToBDD= async (x, y) => {
         user: login
     }
     try {
-        const docRef = await addDoc(collection(db, "pixels"), pixel)
+        const docAjout = doc(db, 'pixels', x+"_"+y);
+        await setDoc(docAjout, pixel, {merge: true});
     } catch (e) {
         console.error("Error adding document: ", e);
     }
@@ -200,7 +209,13 @@ const getPixelFromBDD= async () => {
     }
 }
 
-//    const unsub = onSnapshot(doc(db, "pixels"), (doc) => {
+const deletePixel = async (x,y) => {
+    try{
+        await deleteDoc(doc(db,"pixels", x+"_"+y));
+    }catch (e){
+        console.error("impossible supprimer pixel : ",e);
+    }
+}
 
 const getSnapShot = async () => {
     const queryBDD= query(collection(db, "pixels"));

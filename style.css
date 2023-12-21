@@ -24,6 +24,8 @@ canvas {
   height: 50px;
   width: 50px;
   border-radius: 50%;
+  border-color: lightgray;
+  border-style: solid;
 }
 
 .modification{
@@ -46,7 +48,6 @@ canvas {
   background: aliceblue;
   top: 50%;
   left: 50%;
-  /* bring your own prefixes */
   transform: translate(-50%, -50%);
 }
 
