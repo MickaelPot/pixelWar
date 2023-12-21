@@ -45,12 +45,12 @@ const firebaseConfig = {
  */
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDXCffCXp9mAHT2dYcmJFJ0ZXSOzFYqKAE",
-    authDomain: "piwelwars2.firebaseapp.com",
-    projectId: "piwelwars2",
-    storageBucket: "piwelwars2.appspot.com",
-    messagingSenderId: "211863704403",
-    appId: "1:211863704403:web:7164376a44058e3d3707a6"
+    apiKey: "AIzaSyDLtXnQ3g3WRwwEgPJg0rAUVyKM8YbhxB8",
+    authDomain: "piwelwar3.firebaseapp.com",
+    projectId: "piwelwar3",
+    storageBucket: "piwelwar3.appspot.com",
+    messagingSenderId: "1027661523541",
+    appId: "1:1027661523541:web:dfbeeb05930f003d5a02dc"
 };
 
 const fb = initializeApp(firebaseConfig);
