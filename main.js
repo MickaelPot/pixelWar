@@ -32,6 +32,8 @@ let timeout;
 let verrou= false;
 let thread = true;
 
+/*
+//Ancien projet
 const firebaseConfig = {
     apiKey: "AIzaSyCQMj7K-QffvYA7kJSEYfJfL0lLqRaRRtw",
     authDomain: "pixelwar-a73b2.firebaseapp.com",
@@ -39,6 +41,16 @@ const firebaseConfig = {
     storageBucket: "pixelwar-a73b2.appspot.com",
     messagingSenderId: "601587079264",
     appId: "1:601587079264:web:5ce379926c667105294b05"
+};
+ */
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDXCffCXp9mAHT2dYcmJFJ0ZXSOzFYqKAE",
+    authDomain: "piwelwars2.firebaseapp.com",
+    projectId: "piwelwars2",
+    storageBucket: "piwelwars2.appspot.com",
+    messagingSenderId: "211863704403",
+    appId: "1:211863704403:web:7164376a44058e3d3707a6"
 };
 
 const fb = initializeApp(firebaseConfig);
